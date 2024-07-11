@@ -2,9 +2,13 @@ const UserModel = require("../models/UserModel");
 
 module.exports = async (req, res) => {
   try {
-    const { text, completed, date } = req.body;
+    const { title, description, completed, date } = req.body;
     const userId = req.user.userId;
-    const newTodo = { text, completed, date };
+    const newTodo = { title, description, completed, date };
+    const validationError = newTodo.validateSync();
+    if (validationError) {
+      return res.status(400).send({ error: validationError.message });
+    }
     const user = await UserModel.findByIdAndUpdate(
       userId,
       { $push: { todos: newTodo } },
