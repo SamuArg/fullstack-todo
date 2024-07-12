@@ -14,7 +14,7 @@ const Login = () => {
     loginRequest(mail, password)
       .then(({ token }) => {
         setToken(token);
-        navigate("login");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -49,12 +49,15 @@ const Login = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary mb-3">
-          Login
+          Se connecter
         </button>
       </form>
-      <p>Don't have an account ?</p>
-      <a className="link-danger link-underline-opacity-0" href="#">
-        Register
+      <a
+        className="link-primary link-underline-opacity-0"
+        href="#"
+        onClick={() => navigate("/register")}
+      >
+        S'inscrire
       </a>
     </Container>
   );
