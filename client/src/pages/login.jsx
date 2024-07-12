@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import loginRequest from "../api/loginRequest";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,8 @@ import { TokenContext } from "../App.jsx";
 const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(TokenContext);
+  const [token, setToken] = useContext(TokenContext);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,8 +17,8 @@ const Login = () => {
         setToken(token);
         navigate("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        setErrorMessage("Identification échouée");
       });
   };
   return (
@@ -48,6 +49,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <p className="text-danger">{errorMessage}</p>
         <button type="submit" className="btn btn-primary mb-3">
           Se connecter
         </button>

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { TokenContext } from "../App";
+import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import registerRequest from "../api/registerRequest";
@@ -9,8 +8,6 @@ const Register = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [token, setToken] = useState(TokenContext);
-  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const handleRegister = (e) => {
     e.preventDefault();
