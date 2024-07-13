@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 const Todo = () => {
   return (
     <div className="mb-4">
-      <div className="card col-sm">
+      <Container className="card col-sm">
         <div className="card-body">
           <Title>
             <h3 className="card-title">Title</h3>
             <div>
-              <button type="button" className="btn btn-secondary btn-sm">
-                Modifier
-              </button>
+              <EditOutlinedIcon />
               <ClearIcon className="ms-2" />
             </div>
           </Title>
@@ -30,7 +29,7 @@ const Todo = () => {
             </div>
           </Buttons>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };
@@ -56,6 +55,12 @@ const Title = styled.div`
   & svg {
     cursor: pointer;
   }
+`;
+
+const Container = styled.div`
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #e8e7f2;
 `;
 
 export default Todo;

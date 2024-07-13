@@ -1,20 +1,18 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import loginRequest from "../api/loginRequest";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { TokenContext } from "../App.jsx";
 
 const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useContext(TokenContext);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     loginRequest(mail, password)
       .then(({ token }) => {
-        setToken(token);
+        localStorage.setItem("token", token);
         navigate("/");
       })
       .catch(() => {
