@@ -1,5 +1,6 @@
+import { useState } from "react";
 import Todo from "./Todo";
-const Todos = () => {
+const Todos = (todos, setTodos) => {
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">

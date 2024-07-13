@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Modal from "./Modal";
-const Header = () => {
+const Header = ({ todos, setTodos }) => {
   return (
     <Container className="px-3">
       <Filter className="mb-4">
@@ -16,7 +16,7 @@ const Header = () => {
         >
           <AddIcon />
         </button>
-        <Modal />
+        <Modal setTodos={setTodos} />
         <div
           className="modal fade"
           id="modal"

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-  const header = req.headers.Authorization;
+  const header = req.headers.authorization;
   if (!header) {
     res.status(401).send("Non connecté");
   } else {
