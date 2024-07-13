@@ -12,5 +12,6 @@ router.delete(
   isLoggedIn,
   require("./routes/deleteTodoRoute")
 );
+router.get("/todos/:todoId", isLoggedIn, require("./routes/readTodoRoute"));
 
 module.exports = router;

@@ -1,18 +1,23 @@
 import styled from "styled-components";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
 const Todo = () => {
   return (
-    <div>
+    <div className="mb-4">
       <div className="card col-sm">
         <div className="card-body">
           <Title>
             <h3 className="card-title">Title</h3>
-            <DeleteIcon></DeleteIcon>
+            <div>
+              <button type="button" className="btn btn-secondary btn-sm">
+                Modifier
+              </button>
+              <ClearIcon className="ms-2" />
+            </div>
           </Title>
 
           <h5 className="card-title">Date</h5>
           <TextTruncate>text</TextTruncate>
-          <Buttons>
+          <Buttons className="d-flex justify-content-start">
             <div className="form-check form-switch">
               <input
                 type="checkbox"
@@ -23,9 +28,6 @@ const Todo = () => {
                 Complétée
               </label>
             </div>
-            <button type="button" className="btn btn-secondary">
-              Modifier
-            </button>
           </Buttons>
         </div>
       </div>
