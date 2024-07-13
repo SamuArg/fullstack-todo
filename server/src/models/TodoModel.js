@@ -23,6 +23,11 @@ const TodoSchema = new mongoose.Schema({
       message: "La date ne peut pas être dans le passé",
     },
   },
+  urgent: {
+    type: String,
+    enum: ["0", "1"],
+    required: true,
+  },
 });
 
 const TodoModel = mongoose.model("Todo", TodoSchema);

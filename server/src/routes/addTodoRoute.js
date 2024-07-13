@@ -2,9 +2,9 @@ const UserModel = require("../models/UserModel");
 
 module.exports = async (req, res) => {
   try {
-    const { title, description, completed, date } = req.body;
+    const { title, description, completed, date, urgent } = req.body;
     const userId = req.user.userId;
-    const newTodo = { title, description, completed, date };
+    const newTodo = { title, description, completed, date, urgent };
     const validationError = newTodo.validateSync();
     if (validationError) {
       return res.status(400).send({ error: validationError.message });

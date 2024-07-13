@@ -11,6 +11,7 @@ export default (todo, token) => {
       description: todo.description,
       completed: todo.completed,
       date: todo.date,
+      urgent: todo.urgent,
     }),
   }).then((response) => {
     return response.json();

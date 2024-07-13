@@ -25,6 +25,9 @@ module.exports = async (req, res) => {
     if (updates.date !== undefined) {
       todo.date = updates.date;
     }
+    if (updates.urgent !== undefined) {
+      todo.urgent = updates.urgent;
+    }
     await user.save();
     res.status(200).json(user);
   } catch (error) {
