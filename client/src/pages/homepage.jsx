@@ -3,16 +3,18 @@ import Header from "../components/Header";
 import Todos from "../components/Todos";
 import styled from "styled-components";
 import readTodosRequest from "../api/readTodosRequest";
+import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const [todos, setTodos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     readTodosRequest(localStorage.getItem("token"))
       .then((response) => {
         setTodos(response);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch(() => {
+        navigate("/login");
       });
   }, []);
 

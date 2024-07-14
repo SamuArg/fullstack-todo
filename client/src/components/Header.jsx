@@ -3,7 +3,14 @@ import AddIcon from "@mui/icons-material/Add";
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom";
 const Header = ({ todos, setTodos }) => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    alert("Vous êtes bien déconnecté");
+    navigate("/login");
+  };
   return (
     <Container className="px-3">
       <Filter className="mb-4">
@@ -19,7 +26,7 @@ const Header = ({ todos, setTodos }) => {
         <Modal setTodos={setTodos} />
       </Filter>
       <h1>TO DO</h1>
-      <LogoutIcon />
+      <LogoutIcon onClick={handleLogout} />
     </Container>
   );
 };

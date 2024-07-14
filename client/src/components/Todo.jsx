@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-let urgent = "";
 const Todo = ({ todo }) => {
   const date = todo.date.split("T")[0];
-  console.log(urgent);
   return (
     <div className="mb-4">
       <Container className="card col-sm" urgent={todo.urgent}>
