@@ -16,6 +16,18 @@ const Todo = ({ todo, setTodos }) => {
         });
     }
   };
+  const askToDelete = () => {
+    if (confirm("Voulez-vous supprimer cette tâche complétée ?")) {
+      const token = localStorage.getItem("token");
+      deleteTodoRequest(todo, token)
+        .then((response) => {
+          setTodos(response.todos);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   const updateCompleted = () => {
     const token = localStorage.getItem("token");
     updateTodoRequest(
@@ -27,6 +39,7 @@ const Todo = ({ todo, setTodos }) => {
     )
       .then((response) => {
         setTodos(response.todos);
+        askToDelete();
       })
       .catch((err) => {
         console.log(err);
