@@ -1,21 +1,24 @@
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-const Todo = () => {
+let urgent = "";
+const Todo = ({ todo }) => {
+  const date = todo.date.split("T")[0];
+  console.log(urgent);
   return (
     <div className="mb-4">
-      <Container className="card col-sm">
+      <Container className="card col-sm" urgent={todo.urgent}>
         <div className="card-body">
           <Title>
-            <h3 className="card-title">Title</h3>
+            <h3 className="card-title">{todo.title}</h3>
             <div>
               <EditOutlinedIcon />
               <ClearIcon className="ms-2" />
             </div>
           </Title>
 
-          <h5 className="card-title">Date</h5>
-          <TextTruncate>text</TextTruncate>
+          <h5 className="card-title">{date}</h5>
+          <TextTruncate>{todo.description}</TextTruncate>
           <Buttons className="d-flex justify-content-start">
             <div className="form-check form-switch">
               <input
@@ -60,7 +63,7 @@ const Title = styled.div`
 const Container = styled.div`
   border-radius: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #e8e7f2;
+  background-color: ${({ urgent }) => (urgent == "1" ? "#de7777" : "#e8e7f2")};
 `;
 
 export default Todo;
