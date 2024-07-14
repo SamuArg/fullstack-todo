@@ -4,7 +4,7 @@ const Todos = ({ todos, setTodos }) => {
   const listMap = sortedTodos.map((todo) => {
     return (
       <div key={todo._id} className="col-md-4">
-        <Todo todo={todo} />
+        <Todo todo={todo} setTodos={setTodos} />
       </div>
     );
   });

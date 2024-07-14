@@ -1,11 +1,32 @@
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-const Todo = ({ todo }) => {
+import updateTodoRequest from "../api/updateTodoRequest";
+const Todo = ({ todo, setTodos }) => {
+  const updateCompleted = () => {
+    const token = localStorage.getItem("token");
+    updateTodoRequest(
+      {
+        completed: !todo.completed,
+      },
+      todo,
+      token
+    )
+      .then((response) => {
+        setTodos(response.todos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const date = todo.date.split("T")[0];
   return (
     <div className="mb-4">
-      <Container className="card col-sm" urgent={todo.urgent}>
+      <Container
+        className="card col-sm"
+        urgent={todo.urgent}
+        completed={todo.completed.toString()}
+      >
         <div className="card-body">
           <Title>
             <h3 className="card-title">{todo.title}</h3>
@@ -23,6 +44,8 @@ const Todo = ({ todo }) => {
                 type="checkbox"
                 className="form-check-input"
                 role="switch"
+                onChange={updateCompleted}
+                checked={todo.completed}
               />
               <label htmlFor="" className="form-check-label">
                 Complétée
@@ -61,7 +84,8 @@ const Title = styled.div`
 const Container = styled.div`
   border-radius: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: ${({ urgent }) => (urgent == "1" ? "#de7777" : "#e8e7f2")};
+  background-color: ${({ urgent, completed }) =>
+    completed === "true" ? "#aaaaaa" : urgent === "1" ? "#de7777" : "#e8e7f2"};
 `;
 
 export default Todo;
