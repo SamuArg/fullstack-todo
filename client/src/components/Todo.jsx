@@ -2,7 +2,20 @@ import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import updateTodoRequest from "../api/updateTodoRequest";
+import deleteTodoRequest from "../api/deleteTodoRequest";
 const Todo = ({ todo, setTodos }) => {
+  const deleteTodo = () => {
+    if (confirm("Voulez-vous supprimer cette tâche ?")) {
+      const token = localStorage.getItem("token");
+      deleteTodoRequest(todo, token)
+        .then((response) => {
+          setTodos(response.todos);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   const updateCompleted = () => {
     const token = localStorage.getItem("token");
     updateTodoRequest(
@@ -32,7 +45,7 @@ const Todo = ({ todo, setTodos }) => {
             <h3 className="card-title">{todo.title}</h3>
             <div>
               <EditOutlinedIcon />
-              <ClearIcon className="ms-2" />
+              <ClearIcon className="ms-2" onClick={deleteTodo} />
             </div>
           </Title>
 
