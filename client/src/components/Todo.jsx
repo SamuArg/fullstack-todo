@@ -39,7 +39,9 @@ const Todo = ({ todo, setTodos }) => {
     )
       .then((response) => {
         setTodos(response.todos);
-        askToDelete();
+        if (!todo.completed) {
+          askToDelete();
+        }
       })
       .catch((err) => {
         console.log(err);
