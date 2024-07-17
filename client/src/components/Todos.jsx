@@ -10,7 +10,7 @@ const Todos = ({ todos, setTodos }) => {
   });
   return (
     <div className="container-fluid">
-      <div className="row justify-content-center">{listMap}</div>
+      <div className="row justify-content-start">{listMap}</div>
     </div>
   );
 };
