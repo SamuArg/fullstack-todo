@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
+  const [showCompleted, setShowCompleted] = useState("Toutes");
 
   useEffect(() => {
     readTodosRequest(localStorage.getItem("token"))
@@ -20,8 +21,13 @@ const Homepage = () => {
 
   return (
     <Div className="pt-4 bg-gradient">
-      <Header todos={todos} setTodos={setTodos} />
-      <Todos todos={todos} setTodos={setTodos} />
+      <Header
+        todos={todos}
+        setTodos={setTodos}
+        showCompleted={showCompleted}
+        setShowCompleted={setShowCompleted}
+      />
+      <Todos todos={todos} setTodos={setTodos} showCompleted={showCompleted} />
     </Div>
   );
 };
