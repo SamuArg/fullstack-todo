@@ -55,9 +55,9 @@ const Header = ({ todos, setTodos, showCompleted, setShowCompleted }) => {
   };
 
   return (
-    <Container className="px-3">
+    <Container className="px-3 mb-4">
       <h1>TO DO</h1>
-      <Filter className="mb-4">
+      <Filter>
         <button
           type="button"
           className="btn btn-primary"
@@ -111,6 +111,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
   & svg {
     cursor: pointer;
   }
@@ -119,6 +120,8 @@ const Container = styled.div`
 const Filter = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
 `;
 
