@@ -10,12 +10,12 @@ const Header = ({
   setTodos,
   showCompleted,
   setShowCompleted,
-  search,
   setSearch,
 }) => {
   const navigate = useNavigate();
   const [sortDate, setSortDate] = useState(true);
   const [sortUrgent, setSortUrgent] = useState(true);
+  const width = document.getElementsByTagName("h1")[0].offsetWidth;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -66,7 +66,7 @@ const Header = ({
   };
 
   return (
-    <Container className="px-3 mb-4">
+    <Container width={width} className="px-3 mb-3">
       <h1>TO DO</h1>
       <Filter>
         <button
@@ -127,9 +127,9 @@ const Header = ({
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   & svg {
     cursor: pointer;
   }
@@ -143,7 +143,7 @@ const Filter = styled.div`
   gap: 5px;
   input {
     max-width: 10vw;
-    min-width: 144px;
+    min-width: 170px;
   }
 `;
 
