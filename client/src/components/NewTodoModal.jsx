@@ -3,7 +3,7 @@ import styled from "styled-components";
 import addTodoRequest from "../api/addTodoRequest";
 import { useNavigate } from "react-router-dom";
 
-const Modal = ({ setTodos }) => {
+const NewTodoModal = ({ setTodos }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);
   const [title, setTitle] = useState("");
@@ -69,9 +69,7 @@ const Modal = ({ setTodos }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Nouvelle tâche
-            </h1>
+            <h1 className="modal-title fs-5">Nouvelle tâche</h1>
             <button
               type="button"
               className="btn-close"
@@ -90,7 +88,6 @@ const Modal = ({ setTodos }) => {
                     onChange={handleTitle}
                     type="text"
                     className="form-control"
-                    id="title"
                     maxLength="10"
                     required
                     value={title}
@@ -105,7 +102,6 @@ const Modal = ({ setTodos }) => {
                   <input
                     onChange={handleDate}
                     type="date"
-                    id="date"
                     min={currentDate}
                     required
                     value={date}
@@ -119,9 +115,8 @@ const Modal = ({ setTodos }) => {
                 <div className="col">
                   <Textarea
                     onChange={handleDescription}
-                    maxLength="140"
+                    maxLength="100"
                     className="form-control"
-                    id="description"
                     required
                     value={description}
                   />
@@ -130,7 +125,6 @@ const Modal = ({ setTodos }) => {
               <div className="col-4">
                 <select
                   onChange={handleUrgent}
-                  id="urgent"
                   className="form-select"
                   required
                   value={urgent}
@@ -168,4 +162,4 @@ const Textarea = styled.textarea`
   resize: none;
 `;
 
-export default Modal;
+export default NewTodoModal;

@@ -3,6 +3,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import updateTodoRequest from "../api/updateTodoRequest";
 import deleteTodoRequest from "../api/deleteTodoRequest";
+import EditTodoModal from "./EditTodoModal";
 const Todo = ({ todo, setTodos }) => {
   const deleteTodo = () => {
     if (confirm("Voulez-vous supprimer cette tâche ?")) {
@@ -48,6 +49,7 @@ const Todo = ({ todo, setTodos }) => {
       });
   };
   const date = todo.date.split("T")[0];
+  const modalId = `#modal${todo._id}`;
   return (
     <div className="mb-4">
       <Container
@@ -59,7 +61,11 @@ const Todo = ({ todo, setTodos }) => {
           <Title>
             <h3 className="card-title">{todo.title}</h3>
             <div>
-              <EditOutlinedIcon />
+              <EditOutlinedIcon
+                data-bs-toggle="modal"
+                data-bs-target={modalId}
+              />
+              <EditTodoModal todo={todo} setTodos={setTodos} />
               <ClearIcon className="ms-2" onClick={deleteTodo} />
             </div>
           </Title>
@@ -92,12 +98,14 @@ const Buttons = styled.div`
   flex-wrap: wrap;
 `;
 
+// Met ... si il n'y pas suffisamment de place pour toute la description
 const TextTruncate = styled.p`
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 20px;
 `;
 
 const Title = styled.div`

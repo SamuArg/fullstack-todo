@@ -16,12 +16,6 @@ const TodoSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    validate: {
-      validator: function (value) {
-        return value >= new Date(); //Vérifie si la date rentrée est dans le futur
-      },
-      message: "La date ne peut pas être dans le passé",
-    },
   },
   urgent: {
     type: String,
