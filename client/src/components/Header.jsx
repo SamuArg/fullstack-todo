@@ -5,7 +5,14 @@ import NewTodoModal from "./NewTodoModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Header = ({ todos, setTodos, showCompleted, setShowCompleted }) => {
+const Header = ({
+  todos,
+  setTodos,
+  showCompleted,
+  setShowCompleted,
+  search,
+  setSearch,
+}) => {
   const navigate = useNavigate();
   const [sortDate, setSortDate] = useState(true);
   const [sortUrgent, setSortUrgent] = useState(true);
@@ -54,6 +61,10 @@ const Header = ({ todos, setTodos, showCompleted, setShowCompleted }) => {
     });
   };
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <Container className="px-3 mb-4">
       <h1>TO DO</h1>
@@ -99,6 +110,13 @@ const Header = ({ todos, setTodos, showCompleted, setShowCompleted }) => {
         >
           Montrer : {showCompleted}
         </button>
+        <input
+          className="form-control"
+          type="search"
+          placeholder="Chercher par titre"
+          aria-label="Search"
+          onChange={handleSearch}
+        ></input>
       </Filter>
 
       <LogoutIcon onClick={handleLogout} />
@@ -123,6 +141,10 @@ const Filter = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
+  input {
+    max-width: 10vw;
+    min-width: 144px;
+  }
 `;
 
 export default Header;

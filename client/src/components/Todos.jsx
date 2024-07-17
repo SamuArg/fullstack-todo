@@ -1,6 +1,6 @@
 import Todo from "./Todo";
 
-const Todos = ({ todos, setTodos, showCompleted }) => {
+const Todos = ({ todos, setTodos, showCompleted, search }) => {
   const listMap = todos
     .filter((todo) =>
       showCompleted === "Toutes"
@@ -9,6 +9,9 @@ const Todos = ({ todos, setTodos, showCompleted }) => {
         ? todo.completed
         : !todo.completed
     )
+    .filter((todo) => {
+      return todo.title.toLowerCase().startsWith(search.toLowerCase());
+    })
     .map((todo) => {
       return (
         <div key={todo._id} className="col-md-4">

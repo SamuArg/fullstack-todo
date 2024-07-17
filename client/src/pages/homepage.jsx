@@ -8,6 +8,7 @@ const Homepage = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
   const [showCompleted, setShowCompleted] = useState("Toutes");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     readTodosRequest(localStorage.getItem("token"))
@@ -26,8 +27,15 @@ const Homepage = () => {
         setTodos={setTodos}
         showCompleted={showCompleted}
         setShowCompleted={setShowCompleted}
+        search={search}
+        setSearch={setSearch}
       />
-      <Todos todos={todos} setTodos={setTodos} showCompleted={showCompleted} />
+      <Todos
+        todos={todos}
+        setTodos={setTodos}
+        showCompleted={showCompleted}
+        search={search}
+      />
     </Div>
   );
 };
