@@ -4,6 +4,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import NewTodoModal from "./NewTodoModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import LogoutModal from "./LogoutModal";
 
 const Header = ({
   todos,
@@ -18,7 +19,6 @@ const Header = ({
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    alert("Vous êtes bien déconnecté");
     navigate("/login");
   };
 
@@ -118,7 +118,8 @@ const Header = ({
         ></input>
       </Filter>
 
-      <LogoutIcon onClick={handleLogout} />
+      <LogoutIcon data-bs-toggle="modal" data-bs-target="#logout" />
+      <LogoutModal handleLogout={handleLogout} />
     </Container>
   );
 };
