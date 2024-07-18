@@ -62,7 +62,7 @@ const EditTodoModal = ({ todo, setTodos }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5">Nouvelle tâche</h1>
+            <h1 className="modal-title fs-5">Modifier tâche</h1>
             <button
               type="button"
               className="btn-close"

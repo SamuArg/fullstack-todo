@@ -4,6 +4,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import updateTodoRequest from "../api/updateTodoRequest";
 import deleteTodoRequest from "../api/deleteTodoRequest";
 import EditTodoModal from "./EditTodoModal";
+import BigTodo from "./BigTodo";
 const Todo = ({ todo, setTodos }) => {
   const deleteTodo = () => {
     if (confirm("Voulez-vous supprimer cette tâche ?")) {
@@ -50,6 +51,7 @@ const Todo = ({ todo, setTodos }) => {
   };
   const date = todo.date.split("T")[0];
   const modalId = `#modal${todo._id}`;
+  const todoId = `#${todo._id}`;
   return (
     <div className="mb-4">
       <Container
@@ -59,7 +61,13 @@ const Todo = ({ todo, setTodos }) => {
       >
         <div className="card-body">
           <Title>
-            <h3 className="card-title">{todo.title}</h3>
+            <h3
+              className="card-title"
+              data-bs-toggle="modal"
+              data-bs-target={todoId}
+            >
+              {todo.title}
+            </h3>
             <div>
               <EditOutlinedIcon
                 data-bs-toggle="modal"
@@ -88,6 +96,7 @@ const Todo = ({ todo, setTodos }) => {
           </Buttons>
         </div>
       </Container>
+      <BigTodo todo={todo} setTodos={setTodos} modalId={modalId} />
     </div>
   );
 };
@@ -112,7 +121,8 @@ const Title = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  & svg {
+  & svg,
+  h3 {
     cursor: pointer;
   }
 `;

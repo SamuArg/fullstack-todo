@@ -15,7 +15,6 @@ const Header = ({
   const navigate = useNavigate();
   const [sortDate, setSortDate] = useState(true);
   const [sortUrgent, setSortUrgent] = useState(true);
-  const width = document.getElementsByTagName("h1")[0].offsetWidth;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -66,7 +65,7 @@ const Header = ({
   };
 
   return (
-    <Container width={width} className="px-3 mb-3">
+    <Container className="px-3 mb-3">
       <h1>TO DO</h1>
       <Filter>
         <button
