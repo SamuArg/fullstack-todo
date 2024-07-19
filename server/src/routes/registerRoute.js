@@ -1,6 +1,6 @@
 const UserModel = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
-
+//Permet la création d'un nouvel utilisateur
 module.exports = async (req, res) => {
   try {
     const { mail, password } = req.body;

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+//Component représentant la fenêtre qui s'ouvre quand on veut supprimer une tâche
 const DeleteModal = ({ handleDelete, message, modalId }) => {
   const input = useRef(null); // Lié au bouton annulé du modal
   const deleteTodo = () => {
@@ -10,7 +11,7 @@ const DeleteModal = ({ handleDelete, message, modalId }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Se déconnecter</h5>
+            <h5 className="modal-title">Supprimer une tâche</h5>
             <button
               type="button"
               className="btn-close"

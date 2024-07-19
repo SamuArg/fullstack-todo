@@ -3,6 +3,8 @@ import styled from "styled-components";
 import addTodoRequest from "../api/addTodoRequest";
 import { useNavigate } from "react-router-dom";
 
+//Component représentant la fenêtre qui s'ouvre lorsque l'utilisateur clique sur le bouton pour ajouter une nouvelle tâche
+//Contient un formulaire à remplir avec les informations de la tâche
 const NewTodoModal = ({ setTodos, setShowAlert }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);

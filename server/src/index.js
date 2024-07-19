@@ -4,16 +4,17 @@ const mongoose = require("mongoose");
 const router = require("./router");
 const cors = require("cors");
 
+// Récupère le .env
 dotenv.config();
 
 const app = express();
-const PORT = 8080;
 
 app.use(express.json());
+//Entête cors
 app.use(cors());
 app.use(router);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
-  console.log("Starting on port " + PORT);
-  app.listen(PORT);
+  console.log("Starting on port " + process.env.PORT);
+  app.listen(process.env.PORT);
 });

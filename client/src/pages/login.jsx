@@ -2,7 +2,7 @@ import { useState } from "react";
 import loginRequest from "../api/loginRequest";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
+// Page pour se connecter
 const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");

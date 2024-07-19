@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const UserModel = require("../models/UserModel");
 
+//Permet la connexion d'un utilisateur
 module.exports = async (req, res) => {
   try {
     const { mail, password } = req.body;

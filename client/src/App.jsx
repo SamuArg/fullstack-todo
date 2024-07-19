@@ -3,7 +3,7 @@ import Register from "./pages/register";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./privateRoute/PrivateRoute";
 import Homepage from "./pages/homepage";
-
+// Gère les routes
 function App() {
   return (
     <Routes>

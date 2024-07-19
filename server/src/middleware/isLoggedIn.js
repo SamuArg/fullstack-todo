@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-
+// Vérifie si l'utilisateur est bien connecté et renvoie le token de connexion
 module.exports = (req, res, next) => {
   const header = req.headers.authorization;
   if (!header) {

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+// Component représentant la fenêtre qui s'ouvre lorsque l'utilisateur clique sur le bouton de déconnexion
 const LogoutModal = ({ handleLogout }) => {
   const input = useRef(null); // Lié au bouton annulé du modal
   const logout = () => {

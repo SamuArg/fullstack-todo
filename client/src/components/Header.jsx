@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutModal from "./LogoutModal";
 
+//Component représentant la barre de header en haut des tâches, contient tous les boutons de filtres, de recherches ainsi que d'ajout de tâches
 const Header = ({
   todos,
   setTodos,
@@ -26,7 +27,7 @@ const Header = ({
     localStorage.removeItem("token");
     navigate("/login");
   };
-
+  //Trie les tâches par date ascendantes ou descendantes
   const handleSortDate = () => {
     setSortDate(!sortDate);
     const sortedTodos = [...todos].sort((a, b) => {
@@ -40,7 +41,7 @@ const Header = ({
     });
     setTodos(sortedTodos);
   };
-
+  //Trie les tâches par urgence ascendantes ou descendantes
   const handleSortUrgent = () => {
     setSortUrgent(!sortUrgent);
     const sortedTodos = [...todos].sort((a, b) => {
@@ -52,7 +53,7 @@ const Header = ({
     });
     setTodos(sortedTodos);
   };
-
+  // Filtre les tâches par complétées ou non-complétées
   const handleShowCompleted = () => {
     setShowCompleted((previous) => {
       if (previous === "Toutes") {
@@ -68,7 +69,7 @@ const Header = ({
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-
+  // Modifie le bouton qui définie quel champ doit être recherché
   const handleSearchFieldButton = () => {
     if (searchField === "titre") {
       setSearchField("description");
@@ -207,7 +208,7 @@ const Alert = styled.div`
   transform: translate(-50%);
   z-index: 1050;
 `;
-
+//Place l'alerte en milieu en haut de l'écran
 const EditAlert = styled.div`
   position: fixed;
   left: 50%;

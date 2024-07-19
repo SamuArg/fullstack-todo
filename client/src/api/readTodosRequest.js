@@ -1,5 +1,5 @@
 import { API_URL } from "./config";
-
+//Crée une requête pour lire tous les tâches d'un utilisateur
 export default (token) => {
   return fetch(`${API_URL}/todos`, {
     method: "GET",

@@ -1,5 +1,5 @@
 import { API_URL } from "./config";
-
+// Crée une requête pour s'enregistrer comme nouvel utilisateur
 export default (mail, password) => {
   return fetch(`${API_URL}/register`, {
     method: "POST",

@@ -1,10 +1,12 @@
 import styled from "styled-components";
+//Component représentant une tâche qui s'affiche au milieu de l'écran pour voir toutes ses informations en grand
 const BigTodo = ({ todo, modalId }) => {
   const date = todo.date.split("T")[0];
   return (
     <div className="modal" id={todo._id} tabIndex="-1">
       <div className="modal-dialog modal-dialog-centered">
         <Container
+          // Variable de style dynamique seulement utilisé dans styled-components
           $urgent={todo.urgent}
           $completed={todo.completed}
           className="modal-content"

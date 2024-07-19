@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
+//Component représentant toutes les tâches qui s'affichent sur la page principal, gère les filtres et le système de pagination
 const Todos = ({
   todos,
   setTodos,

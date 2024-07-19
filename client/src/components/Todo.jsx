@@ -7,6 +7,8 @@ import EditTodoModal from "./EditTodoModal";
 import BigTodo from "./BigTodo";
 import DeleteModal from "./DeleteModal";
 import { useState, useRef } from "react";
+
+//Component représentant chaque tâche dans la page principal, permet de gérer chaque tâche individuellement en cliquant sur leurs boutons respectifs
 const Todo = ({ todo, setTodos, setShowEditAlert }) => {
   const [deleteMessage, setDeleteMessage] = useState("");
   const deleteButtonRef = useRef(null);

@@ -4,6 +4,7 @@ import Todos from "../components/Todos";
 import styled from "styled-components";
 import readTodosRequest from "../api/readTodosRequest";
 import { useNavigate } from "react-router-dom";
+//Page principale qui contient Header et les tâches
 const Homepage = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();

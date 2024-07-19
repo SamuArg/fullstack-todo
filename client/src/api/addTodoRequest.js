@@ -1,4 +1,6 @@
 import { API_URL } from "./config";
+
+//Crée une requête pour créer une nouvelle tâche
 export default (todo, token) => {
   return fetch(`${API_URL}/addTodo`, {
     method: "POST",

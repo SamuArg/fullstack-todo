@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import updateTodoRequest from "../api/updateTodoRequest";
 import { useNavigate } from "react-router-dom";
-
+// Component représentant la fenêtre qui s'ouvre lorsqu'on décide de modifier une tâche existante
 const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);
@@ -25,6 +25,8 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
     setUrgent(e.target.value);
   };
   const input = useRef(null);
+
+  //Envoie la requête via l'API rest
   const editTodo = () => {
     if (title && date && description && urgent) {
       const updates = {
@@ -35,6 +37,7 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
         completed: todo.completed,
       };
       const token = localStorage.getItem("token");
+      //Modifie la liste actuelle affichée des tâches avec la réponse du serveur qui nous renvoie la nouvelle liste de tâches
       updateTodoRequest(updates, todo, token)
         .then((response) => {
           setTodos(response.todos);
@@ -42,7 +45,6 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
           setShowEditAlert(true);
         })
         .catch((err) => {
-          alert("Veuillez vous reconnectez !");
           console.log(err);
           input.current.click();
           navigate("/login");

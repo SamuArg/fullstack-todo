@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import registerRequest from "../api/registerRequest";
-
+//Page pour créer un compte
 const Register = () => {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
