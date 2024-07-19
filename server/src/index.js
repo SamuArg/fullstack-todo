@@ -6,12 +6,15 @@ const cors = require("cors");
 
 // Récupère le .env
 dotenv.config();
+const corsOptions = {
+  origin: process.env.FRONTEND_URI,
+};
 
 const app = express();
 
 app.use(express.json());
 //Entête cors
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(router);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
