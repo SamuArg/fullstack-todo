@@ -16,6 +16,7 @@ const Todos = ({
 
   const todosPerPage = 12;
   const pagesVisited = pageNumber * todosPerPage;
+  const pages = [];
 
   // À chaque changement de filtre remettre à la première page
   useEffect(() => {
@@ -64,6 +65,10 @@ const Todos = ({
       }).length / todosPerPage
   );
 
+  for (let i = 0; i < pageCount; i++) {
+    pages.push(i);
+  }
+
   const changePage = (direction) => {
     setPageNumber((prevPageNumber) =>
       direction === "next"
@@ -81,13 +86,13 @@ const Todos = ({
             onClick={() => changePage("previous")}
             className={pageNumber + 1 === 1 ? "" : "active"}
           />
-          {Array.from({ length: pageCount }, (_, index) => (
+          {pages.map((page) => (
             <button
-              key={index}
-              onClick={() => setPageNumber(index)}
-              className={index === pageNumber ? "active" : ""}
+              key={page}
+              onClick={() => setPageNumber(page)}
+              className={page === pageNumber ? "active" : ""}
             >
-              {index + 1}
+              {page + 1}
             </button>
           ))}
           <ArrowForwardIosIcon
