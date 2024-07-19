@@ -5,30 +5,25 @@ import updateTodoRequest from "../api/updateTodoRequest";
 import deleteTodoRequest from "../api/deleteTodoRequest";
 import EditTodoModal from "./EditTodoModal";
 import BigTodo from "./BigTodo";
+import DeleteModal from "./DeleteModal";
+import { useState, useRef } from "react";
 const Todo = ({ todo, setTodos, setShowEditAlert }) => {
-  const deleteTodo = () => {
-    if (confirm("Voulez-vous supprimer cette tâche ?")) {
-      const token = localStorage.getItem("token");
-      deleteTodoRequest(todo, token)
-        .then((response) => {
-          setTodos(response.todos);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+  const [deleteMessage, setDeleteMessage] = useState("");
+  const deleteButtonRef = useRef(null);
+  const askDeleteTodo = () => {
+    setDeleteMessage("Êtes-vous certain de vouloir supprimer la tâche ?");
+    deleteButtonRef.current.click();
   };
-  const askToDelete = () => {
-    if (confirm("Voulez-vous supprimer cette tâche complétée ?")) {
-      const token = localStorage.getItem("token");
-      deleteTodoRequest(todo, token)
-        .then((response) => {
-          setTodos(response.todos);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+
+  const deleteTodo = () => {
+    const token = localStorage.getItem("token");
+    deleteTodoRequest(todo, token)
+      .then((response) => {
+        setTodos(response.todos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const updateCompleted = () => {
     const token = localStorage.getItem("token");
@@ -42,7 +37,8 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
       .then((response) => {
         setTodos(response.todos);
         if (!todo.completed) {
-          askToDelete();
+          setDeleteMessage("Voulez-vous supprimer cette tâche complétée ?");
+          deleteButtonRef.current.click();
         }
       })
       .catch((err) => {
@@ -78,7 +74,7 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
                 setTodos={setTodos}
                 setShowEditAlert={setShowEditAlert}
               />
-              <ClearIcon className="ms-2" onClick={deleteTodo} />
+              <ClearIcon className="ms-2" onClick={askDeleteTodo} />
             </div>
           </Title>
 
@@ -99,6 +95,19 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
         </div>
       </Container>
       <BigTodo todo={todo} setTodos={setTodos} modalId={modalId} />
+      <DeleteModal
+        modalId={`deleteModal${todo._id}`}
+        handleDelete={deleteTodo}
+        message={deleteMessage}
+      />
+      {/* Bouton caché pour simuler le click pour ouvrir le modal qui sert à valider la suppression d'un todo*/}
+      <button
+        type="button"
+        className="btn btn-primary d-none"
+        data-bs-toggle="modal"
+        data-bs-target={`#deleteModal${todo._id}`}
+        ref={deleteButtonRef}
+      ></button>
     </div>
   );
 };
