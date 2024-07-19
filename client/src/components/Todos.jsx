@@ -10,6 +10,7 @@ const Todos = ({
   showCompleted,
   search,
   setShowEditAlert,
+  searchField,
 }) => {
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -30,7 +31,11 @@ const Todos = ({
         : !todo.completed
     )
     .filter((todo) => {
-      return todo.title.toLowerCase().startsWith(search.toLowerCase());
+      if (searchField == "titre") {
+        return todo.title.toLowerCase().startsWith(search.toLowerCase());
+      } else {
+        return todo.description.toLowerCase().startsWith(search.toLowerCase());
+      }
     })
     .slice(pagesVisited, pagesVisited + todosPerPage)
     .map((todo) => {

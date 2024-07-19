@@ -14,6 +14,8 @@ const Header = ({
   setSearch,
   showEditAlert,
   setShowEditAlert,
+  searchField,
+  setSearchField,
 }) => {
   const navigate = useNavigate();
   const [sortDate, setSortDate] = useState(true);
@@ -65,6 +67,14 @@ const Header = ({
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+
+  const handleSearchFieldButton = () => {
+    if (searchField === "titre") {
+      setSearchField("description");
+    } else {
+      setSearchField("titre");
+    }
   };
 
   return (
@@ -145,10 +155,17 @@ const Header = ({
         >
           Montrer : {showCompleted}
         </button>
+        <button
+          type="button"
+          onClick={handleSearchFieldButton}
+          className="btn btn-primary"
+        >
+          Chercher par : {searchField}
+        </button>
         <input
           className="form-control"
           type="search"
-          placeholder="Chercher par titre"
+          placeholder="Chercher"
           aria-label="Search"
           onChange={handleSearch}
         ></input>

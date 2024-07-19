@@ -10,6 +10,7 @@ const Homepage = () => {
   const [showCompleted, setShowCompleted] = useState("Toutes");
   const [search, setSearch] = useState("");
   const [showEditAlert, setShowEditAlert] = useState(false);
+  const [searchField, setSearchField] = useState("titre");
 
   useEffect(() => {
     readTodosRequest(localStorage.getItem("token"))
@@ -24,6 +25,8 @@ const Homepage = () => {
   return (
     <Div className="pt-4 bg-gradient">
       <Header
+        searchField={searchField}
+        setSearchField={setSearchField}
         todos={todos}
         setTodos={setTodos}
         showCompleted={showCompleted}
@@ -34,6 +37,7 @@ const Homepage = () => {
         setShowEditAlert={setShowEditAlert}
       />
       <Todos
+        searchField={searchField}
         todos={todos}
         setTodos={setTodos}
         showCompleted={showCompleted}
