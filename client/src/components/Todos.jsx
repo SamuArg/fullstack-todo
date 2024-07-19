@@ -78,8 +78,8 @@ const Todos = ({
     );
   };
 
-  //Force le changement de page si la page n'existe plus après la suppression d'une tâche
-  if (pageCount < pageNumber + 1) {
+  //Vérifie si la page actuelle a encore des tâches, sinon revenir en arrière de 1
+  if (displayTodos.length === 0 && pageNumber > 0) {
     setPageNumber(pageNumber - 1);
   }
 
