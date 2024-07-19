@@ -56,8 +56,8 @@ const Todo = ({ todo, setTodos }) => {
     <div className="mb-4">
       <Container
         className="card col-sm"
-        urgent={todo.urgent}
-        completed={todo.completed.toString()}
+        $urgent={todo.urgent}
+        $completed={todo.completed.toString()}
       >
         <div className="card-body">
           <Title>
@@ -89,9 +89,7 @@ const Todo = ({ todo, setTodos }) => {
                 onChange={updateCompleted}
                 checked={todo.completed}
               />
-              <label htmlFor="" className="form-check-label">
-                Complétée
-              </label>
+              <label className="form-check-label">Complétée</label>
             </div>
           </Buttons>
         </div>
@@ -130,8 +128,12 @@ const Title = styled.div`
 const Container = styled.div`
   border-radius: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: ${({ urgent, completed }) =>
-    completed === "true" ? "#aaaaaa" : urgent === "1" ? "#de7777" : "#e8e7f2"};
+  background-color: ${({ $urgent, $completed }) =>
+    $completed === "true"
+      ? "#aaaaaa"
+      : $urgent === "1"
+      ? "#de7777"
+      : "#e8e7f2"};
   .card-body {
     padding: 0.9rem 0.9rem;
   }

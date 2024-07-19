@@ -52,13 +52,7 @@ const EditTodoModal = ({ todo, setTodos }) => {
     }
   };
   return (
-    <div
-      className="modal fade"
-      id={modalId}
-      tabIndex="-1"
-      aria-labelledby="ModalLabel"
-      aria-hidden="true"
-    >
+    <div className="modal fade" id={modalId} tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -73,9 +67,7 @@ const EditTodoModal = ({ todo, setTodos }) => {
           <div className="modal-body">
             <form>
               <div className="form-group row mb-2">
-                <label className="col-3" htmlFor="title">
-                  Titre
-                </label>
+                <label className="col-3">Titre</label>
                 <div className="col-4">
                   <input
                     onChange={handleTitle}
@@ -88,9 +80,7 @@ const EditTodoModal = ({ todo, setTodos }) => {
                 </div>
               </div>
               <div className="form-group row mb-2">
-                <label className="col-3" htmlFor="date">
-                  Date
-                </label>
+                <label className="col-3">Date</label>
                 <div className="col-4">
                   <input
                     onChange={handleDate}
@@ -102,9 +92,7 @@ const EditTodoModal = ({ todo, setTodos }) => {
                 </div>
               </div>
               <div className="form-group row mb-2">
-                <label className="col-3" htmlFor="description">
-                  Description
-                </label>
+                <label className="col-3">Description</label>
                 <div className="col">
                   <Textarea
                     onChange={handleDescription}

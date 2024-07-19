@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Todo from "./Todo";
-import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -10,6 +9,11 @@ const Todos = ({ todos, setTodos, showCompleted, search }) => {
 
   const todosPerPage = 12;
   const pagesVisited = pageNumber * todosPerPage;
+
+  // À chaque changement de filtre remettre à la première page
+  useEffect(() => {
+    setPageNumber(0);
+  }, [search, showCompleted]);
 
   const displayTodos = todos
     .filter((todo) =>
@@ -45,24 +49,37 @@ const Todos = ({ todos, setTodos, showCompleted, search }) => {
       }).length / todosPerPage
   );
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
+  const changePage = (direction) => {
+    setPageNumber((prevPageNumber) =>
+      direction === "next"
+        ? Math.min(prevPageNumber + 1, pageCount - 1)
+        : Math.max(prevPageNumber - 1, 0)
+    );
   };
 
   return (
     <div className="container-fluid">
       <div className="row justify-content-start">{displayTodos}</div>
       {pageCount > 1 ? (
-        <MyPaginate
-          previousLabel={<ArrowBackIosIcon />}
-          nextLabel={<ArrowForwardIosIcon />}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          containerClassName={"pagination"}
-          previousLinkClassName={"previous"}
-          nextLinkClassName={"next"}
-          disabledClassName={"disabled"}
-        />
+        <Paginate>
+          <ArrowBackIosIcon
+            onClick={() => changePage("previous")}
+            className={pageNumber + 1 === 1 ? "" : "active"}
+          />
+          {Array.from({ length: pageCount }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => setPageNumber(index)}
+              className={index === pageNumber ? "active" : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <ArrowForwardIosIcon
+            className={pageNumber + 1 === pageCount ? "" : "active"}
+            onClick={() => changePage("next")}
+          />
+        </Paginate>
       ) : (
         <></>
       )}
@@ -70,9 +87,7 @@ const Todos = ({ todos, setTodos, showCompleted, search }) => {
   );
 };
 
-const MyPaginate = styled(ReactPaginate).attrs({
-  activeClassName: "active",
-})`
+const Paginate = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -81,29 +96,29 @@ const MyPaginate = styled(ReactPaginate).attrs({
   margin-bottom: 0;
   gap: 5px;
 
-  li a {
+  button {
     border-radius: 7px;
     padding: 0.1rem 1rem;
     border: gray 1px solid;
     cursor: pointer;
   }
-  li.previous a,
-  li.next a,
-  li.break a {
-    border-color: transparent;
-  }
-  li.active a {
+
+  button:hover {
     background-color: #0366d6;
     border-color: transparent;
     color: white;
     min-width: 32px;
   }
-  li.disabled a {
-    color: grey;
+
+  button.active {
+    background-color: #0366d6;
+    border-color: transparent;
+    color: white;
   }
-  li.disable,
-  li.disabled a {
-    cursor: default;
+
+  svg.active {
+    color: #0366d6;
+    cursor: pointer;
   }
 `;
 

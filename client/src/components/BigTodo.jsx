@@ -4,7 +4,11 @@ const BigTodo = ({ todo, modalId }) => {
   return (
     <div className="modal" id={todo._id} tabIndex="-1">
       <div className="modal-dialog modal-dialog-centered">
-        <Container urgent={todo.urgent} className="modal-content">
+        <Container
+          $urgent={todo.urgent}
+          $completed={todo.completed}
+          className="modal-content"
+        >
           <div className="modal-header">
             <h5 className="modal-title">{todo.title}</h5>
             <button
@@ -36,8 +40,12 @@ const BigTodo = ({ todo, modalId }) => {
 };
 
 const Container = styled.div`
-  background-color: ${({ urgent, completed }) =>
-    completed === "true" ? "#aaaaaa" : urgent === "1" ? "#de7777" : "#e8e7f2"};
+  background-color: ${({ $urgent, $completed }) =>
+    $completed === "true"
+      ? "#aaaaaa"
+      : $urgent === "1"
+      ? "#de7777"
+      : "#e8e7f2"};
   .modal-body {
     word-break: break-all;
   }
