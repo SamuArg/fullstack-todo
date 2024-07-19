@@ -77,6 +77,11 @@ const Todos = ({
     );
   };
 
+  //Force le changement de page si la page n'existe plus après la suppression d'une tâche
+  if (pageCount < pageNumber + 1) {
+    setPageNumber(pageNumber - 1);
+  }
+
   return (
     <div className="container-fluid">
       <div className="row justify-content-start">{displayTodos}</div>
