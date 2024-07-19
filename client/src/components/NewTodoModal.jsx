@@ -3,7 +3,7 @@ import styled from "styled-components";
 import addTodoRequest from "../api/addTodoRequest";
 import { useNavigate } from "react-router-dom";
 
-const NewTodoModal = ({ setTodos }) => {
+const NewTodoModal = ({ setTodos, setShowAlert }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);
   const [title, setTitle] = useState("");
@@ -44,9 +44,9 @@ const NewTodoModal = ({ setTodos }) => {
       addTodoRequest(todo, token)
         .then((response) => {
           setTodos(response.todos);
-          alert("Votre tâche a bien été créée");
-          resetAll();
           input.current.click();
+          resetAll();
+          setShowAlert(true);
         })
         .catch((err) => {
           alert("Veuillez vous reconnectez !");

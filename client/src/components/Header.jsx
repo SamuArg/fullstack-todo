@@ -16,6 +16,7 @@ const Header = ({
   const navigate = useNavigate();
   const [sortDate, setSortDate] = useState(true);
   const [sortUrgent, setSortUrgent] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -67,6 +68,21 @@ const Header = ({
   return (
     <Container className="px-3 mb-3">
       <h1>TO DO</h1>
+      {showAlert ? (
+        <Alert className="alert alert-success alert-dismissible" role="alert">
+          <div>Votre tâche a été créée avec succès</div>
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            onClick={() => {
+              setShowAlert(false);
+            }}
+          ></button>
+        </Alert>
+      ) : (
+        ""
+      )}
       <Filter>
         <button
           type="button"
@@ -76,7 +92,7 @@ const Header = ({
         >
           <AddIcon />
         </button>
-        <NewTodoModal setTodos={setTodos} />
+        <NewTodoModal setTodos={setTodos} setShowAlert={setShowAlert} />
         <button
           type="button"
           onClick={handleSortDate}
@@ -145,6 +161,13 @@ const Filter = styled.div`
     max-width: 10vw;
     min-width: 170px;
   }
+`;
+
+const Alert = styled.div`
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 1050;
 `;
 
 export default Header;
