@@ -12,6 +12,8 @@ const Header = ({
   showCompleted,
   setShowCompleted,
   setSearch,
+  showEditAlert,
+  setShowEditAlert,
 }) => {
   const navigate = useNavigate();
   const [sortDate, setSortDate] = useState(true);
@@ -80,6 +82,24 @@ const Header = ({
             }}
           ></button>
         </Alert>
+      ) : (
+        ""
+      )}
+      {showEditAlert ? (
+        <EditAlert
+          className="alert alert-success alert-dismissible"
+          role="alert"
+        >
+          <div>Votre tâche a bien été modifiée</div>
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            onClick={() => {
+              setShowEditAlert(false);
+            }}
+          ></button>
+        </EditAlert>
       ) : (
         ""
       )}
@@ -163,7 +183,15 @@ const Filter = styled.div`
   }
 `;
 
+// Place l'alerte au milieu en haut de l'écran
 const Alert = styled.div`
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 1050;
+`;
+
+const EditAlert = styled.div`
   position: fixed;
   left: 50%;
   transform: translate(-50%);

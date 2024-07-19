@@ -3,7 +3,7 @@ import styled from "styled-components";
 import updateTodoRequest from "../api/updateTodoRequest";
 import { useNavigate } from "react-router-dom";
 
-const EditTodoModal = ({ todo, setTodos }) => {
+const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);
   const [title, setTitle] = useState(todo.title);
@@ -38,8 +38,8 @@ const EditTodoModal = ({ todo, setTodos }) => {
       updateTodoRequest(updates, todo, token)
         .then((response) => {
           setTodos(response.todos);
-          alert("Votre tâche a bien été modifiée");
           input.current.click();
+          setShowEditAlert(true);
         })
         .catch((err) => {
           alert("Veuillez vous reconnectez !");

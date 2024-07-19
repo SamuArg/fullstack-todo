@@ -4,7 +4,13 @@ import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const Todos = ({ todos, setTodos, showCompleted, search }) => {
+const Todos = ({
+  todos,
+  setTodos,
+  showCompleted,
+  search,
+  setShowEditAlert,
+}) => {
   const [pageNumber, setPageNumber] = useState(0);
 
   const todosPerPage = 12;
@@ -30,7 +36,11 @@ const Todos = ({ todos, setTodos, showCompleted, search }) => {
     .map((todo) => {
       return (
         <div key={todo._id} className="col-md-4">
-          <Todo todo={todo} setTodos={setTodos} />
+          <Todo
+            todo={todo}
+            setShowEditAlert={setShowEditAlert}
+            setTodos={setTodos}
+          />
         </div>
       );
     });

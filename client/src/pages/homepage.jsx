@@ -9,6 +9,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [showCompleted, setShowCompleted] = useState("Toutes");
   const [search, setSearch] = useState("");
+  const [showEditAlert, setShowEditAlert] = useState(false);
 
   useEffect(() => {
     readTodosRequest(localStorage.getItem("token"))
@@ -29,12 +30,15 @@ const Homepage = () => {
         setShowCompleted={setShowCompleted}
         search={search}
         setSearch={setSearch}
+        showEditAlert={showEditAlert}
+        setShowEditAlert={setShowEditAlert}
       />
       <Todos
         todos={todos}
         setTodos={setTodos}
         showCompleted={showCompleted}
         search={search}
+        setShowEditAlert={setShowEditAlert}
       />
     </Div>
   );

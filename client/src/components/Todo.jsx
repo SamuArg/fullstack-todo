@@ -5,7 +5,7 @@ import updateTodoRequest from "../api/updateTodoRequest";
 import deleteTodoRequest from "../api/deleteTodoRequest";
 import EditTodoModal from "./EditTodoModal";
 import BigTodo from "./BigTodo";
-const Todo = ({ todo, setTodos }) => {
+const Todo = ({ todo, setTodos, setShowEditAlert }) => {
   const deleteTodo = () => {
     if (confirm("Voulez-vous supprimer cette tâche ?")) {
       const token = localStorage.getItem("token");
@@ -73,7 +73,11 @@ const Todo = ({ todo, setTodos }) => {
                 data-bs-toggle="modal"
                 data-bs-target={modalId}
               />
-              <EditTodoModal todo={todo} setTodos={setTodos} />
+              <EditTodoModal
+                todo={todo}
+                setTodos={setTodos}
+                setShowEditAlert={setShowEditAlert}
+              />
               <ClearIcon className="ms-2" onClick={deleteTodo} />
             </div>
           </Title>
