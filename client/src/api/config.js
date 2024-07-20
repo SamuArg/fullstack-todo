@@ -1,2 +1,2 @@
 // Lien vers le backend
-export const API_URL = "https://ift3225-projet2.vercel.app/";
+export const API_URL = "https://samuarg-todo.up.railway.app:8080/";
