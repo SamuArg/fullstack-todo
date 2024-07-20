@@ -55,7 +55,7 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
       <Container
         className="card col-sm"
         $urgent={todo.urgent}
-        $completed={todo.completed.toString()}
+        $completed={todo.completed}
       >
         <div className="card-body">
           <Title>
@@ -144,11 +144,7 @@ const Container = styled.div`
   border-radius: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: ${({ $urgent, $completed }) =>
-    $completed === "true"
-      ? "#aaaaaa"
-      : $urgent === "1"
-      ? "#de7777"
-      : "#e8e7f2"};
+    $completed ? "#aaaaaa" : $urgent === "1" ? "#de7777" : "#e8e7f2"};
   .card-body {
     padding: 0.9rem 0.9rem;
   }

@@ -43,11 +43,7 @@ const BigTodo = ({ todo, modalId }) => {
 
 const Container = styled.div`
   background-color: ${({ $urgent, $completed }) =>
-    $completed === "true"
-      ? "#aaaaaa"
-      : $urgent === "1"
-      ? "#de7777"
-      : "#e8e7f2"};
+    $completed ? "#aaaaaa" : $urgent === "1" ? "#de7777" : "#e8e7f2"};
   .modal-body {
     word-break: break-all;
   }
