@@ -16,8 +16,10 @@ const Register = () => {
       return;
     }
     registerRequest(mail, password).then((response) => {
-      alert(response.message);
-      navigate("/login");
+      alert(response.message || response.error);
+      if (response.message) {
+        navigate("/login");
+      }
     });
   };
   return (
