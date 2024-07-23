@@ -10,7 +10,11 @@ export default (mail, password) => {
       mail: mail,
       password: password,
     }),
-  }).then((response) => {
-    return response.json();
-  });
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      return err;
+    });
 };
