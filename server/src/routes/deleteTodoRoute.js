@@ -1,5 +1,5 @@
 const UserModel = require("../models/UserModel");
-// Supprime une tâche
+// Delete a task
 module.exports = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
       { new: true }
     );
     if (!user) {
-      return res.status(404).send({ error: "Utilisateur non trouvé" });
+      return res.status(404).send({ error: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {

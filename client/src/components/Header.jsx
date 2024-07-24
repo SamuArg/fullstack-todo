@@ -5,8 +5,9 @@ import NewTodoModal from "./NewTodoModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutModal from "./LogoutModal";
+import PropTypes from "prop-types";
 
-//Component représentant la barre de header en haut des tâches, contient tous les boutons de filtres, de recherches ainsi que d'ajout de tâches
+// Component representing the header bar displayed at the top of the task list, containing all the filter buttons, search functionality, and the add task button
 const Header = ({
   todos,
   setTodos,
@@ -27,7 +28,7 @@ const Header = ({
     localStorage.removeItem("token");
     navigate("/login");
   };
-  //Trie les tâches par date ascendantes ou descendantes
+  // Sorts tasks by date in ascending or descending order
   const handleSortDate = () => {
     setSortDate(!sortDate);
     const sortedTodos = [...todos].sort((a, b) => {
@@ -41,7 +42,7 @@ const Header = ({
     });
     setTodos(sortedTodos);
   };
-  //Trie les tâches par urgence ascendantes ou descendantes
+  // Sorts tasks by urgency in ascending or descending order
   const handleSortUrgent = () => {
     setSortUrgent(!sortUrgent);
     const sortedTodos = [...todos].sort((a, b) => {
@@ -53,15 +54,15 @@ const Header = ({
     });
     setTodos(sortedTodos);
   };
-  // Filtre les tâches par complétées ou non-complétées
+  // Filters tasks by completed or not completed status
   const handleShowCompleted = () => {
     setShowCompleted((previous) => {
-      if (previous === "Toutes") {
-        return "Complétées";
-      } else if (previous === "Complétées") {
-        return "Non-Complétées";
+      if (previous === "All") {
+        return "Completed";
+      } else if (previous === "Completed") {
+        return "Not completed";
       } else {
-        return "Toutes";
+        return "All";
       }
     });
   };
@@ -69,12 +70,12 @@ const Header = ({
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-  // Modifie le bouton qui définie quel champ doit être recherché
+  // Modifies the button that defines which field should be searched
   const handleSearchFieldButton = () => {
-    if (searchField === "titre") {
+    if (searchField === "title") {
       setSearchField("description");
     } else {
-      setSearchField("titre");
+      setSearchField("title");
     }
   };
 
@@ -83,7 +84,7 @@ const Header = ({
       <h1>TO DO</h1>
       {showAlert ? (
         <Alert className="alert alert-success alert-dismissible" role="alert">
-          <div>Votre tâche a été créée avec succès</div>
+          <div>Your task has been successfully created</div>
           <button
             type="button"
             className="btn-close"
@@ -101,7 +102,7 @@ const Header = ({
           className="alert alert-success alert-dismissible"
           role="alert"
         >
-          <div>Votre tâche a bien été modifiée</div>
+          <div>Your task has been successfully modified</div>
           <button
             type="button"
             className="btn-close"
@@ -161,7 +162,7 @@ const Header = ({
           onClick={handleSearchFieldButton}
           className="btn btn-primary"
         >
-          Chercher par : {searchField}
+          Search by : {searchField}
         </button>
         <input
           className="form-control"
@@ -176,6 +177,27 @@ const Header = ({
       <LogoutModal handleLogout={handleLogout} />
     </Container>
   );
+};
+
+Header.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      urgent: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+  setTodos: PropTypes.func.isRequired,
+  showCompleted: PropTypes.string.isRequired,
+  setShowCompleted: PropTypes.func.isRequired,
+  setSearch: PropTypes.func.isRequired,
+  showEditAlert: PropTypes.bool.isRequired,
+  setShowEditAlert: PropTypes.func.isRequired,
+  searchField: PropTypes.string.isRequired,
+  setSearchField: PropTypes.func.isRequired,
 };
 
 const Container = styled.div`
@@ -201,14 +223,14 @@ const Filter = styled.div`
   }
 `;
 
-// Place l'alerte au milieu en haut de l'écran
+// Positions the alert in the middle at the top of the screen
 const Alert = styled.div`
   position: fixed;
   left: 50%;
   transform: translate(-50%);
   z-index: 1050;
 `;
-//Place l'alerte en milieu en haut de l'écran
+// Positions the alert in the middle at the top of the screen
 const EditAlert = styled.div`
   position: fixed;
   left: 50%;

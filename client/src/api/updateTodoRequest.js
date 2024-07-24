@@ -1,5 +1,5 @@
 import { API_URL } from "./config";
-// Crée une requête pour modifier une tâche déjà existente
+// Creates a request to modify an existing task
 export default (updates, todo, token) => {
   return fetch(`${API_URL}/todos/${todo._id}`, {
     method: "PUT",

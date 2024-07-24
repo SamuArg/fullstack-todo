@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//Modèle d'une tâche
+//Model of a task
 const TodoSchema = new mongoose.Schema({
   title: {
     type: String,

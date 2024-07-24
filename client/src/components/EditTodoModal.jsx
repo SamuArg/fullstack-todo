@@ -2,7 +2,8 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import updateTodoRequest from "../api/updateTodoRequest";
 import { useNavigate } from "react-router-dom";
-// Component représentant la fenêtre qui s'ouvre lorsqu'on décide de modifier une tâche existante
+import PropTypes from "prop-types";
+// Component representing the window that appears when the user decides to modify an existing task
 const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);
@@ -26,7 +27,7 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
   };
   const input = useRef(null);
 
-  //Envoie la requête via l'API rest
+  // Sends the request using the REST API
   const editTodo = () => {
     if (title && date && description && urgent) {
       const updates = {
@@ -37,7 +38,7 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
         completed: todo.completed,
       };
       const token = localStorage.getItem("token");
-      //Modifie la liste actuelle affichée des tâches avec la réponse du serveur qui nous renvoie la nouvelle liste de tâches
+      // Modifies the current displayed task list with the server response, which sends back the new task list
       updateTodoRequest(updates, todo, token)
         .then((response) => {
           setTodos(response.todos);
@@ -50,7 +51,7 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
           navigate("/login");
         });
     } else {
-      setError("Veuillez remplir tous les champs");
+      setError("Please fill in all the fields");
     }
   };
   return (
@@ -58,7 +59,7 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5">Modifier tâche</h1>
+            <h1 className="modal-title fs-5">Edit task</h1>
             <button
               type="button"
               className="btn-close"
@@ -115,8 +116,8 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
                   <option value="" defaultValue={""}>
                     Importance
                   </option>
-                  <option value="0">Normale</option>
-                  <option value="1">Urgente</option>
+                  <option value="0">Normal</option>
+                  <option value="1">Urgent</option>
                 </select>
               </div>
               <p className="text-center text-danger">{error}</p>
@@ -129,20 +130,33 @@ const EditTodoModal = ({ todo, setTodos, setShowEditAlert }) => {
               data-bs-dismiss="modal"
               ref={input}
             >
-              Annuler
+              Cancel
             </button>
             <button
               type="button"
               onClick={editTodo}
               className="btn btn-primary"
             >
-              Modifier
+              Edit
             </button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+EditTodoModal.propTypes = {
+  todo: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    urgent: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
+  setTodos: PropTypes.func.isRequired,
+  setShowEditAlert: PropTypes.func.isRequired,
 };
 
 const Textarea = styled.textarea`

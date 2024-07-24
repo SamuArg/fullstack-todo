@@ -2,9 +2,10 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import addTodoRequest from "../api/addTodoRequest";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-//Component représentant la fenêtre qui s'ouvre lorsque l'utilisateur clique sur le bouton pour ajouter une nouvelle tâche
-//Contient un formulaire à remplir avec les informations de la tâche
+// Component representing the window that appears when the user clicks on the button to add a new task
+// Contains a form to fill out with task information
 const NewTodoModal = ({ setTodos, setShowAlert }) => {
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().slice(0, 10);
@@ -51,13 +52,13 @@ const NewTodoModal = ({ setTodos, setShowAlert }) => {
           setShowAlert(true);
         })
         .catch((err) => {
-          alert("Veuillez vous reconnectez !");
+          alert("Please log back in!");
           console.log(err);
           input.current.click();
           navigate("/login");
         });
     } else {
-      setError("Veuillez remplir tous les champs");
+      setError("Please fill in all fields");
     }
   };
   return (
@@ -65,7 +66,7 @@ const NewTodoModal = ({ setTodos, setShowAlert }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5">Nouvelle tâche</h1>
+            <h1 className="modal-title fs-5">New task</h1>
             <button
               type="button"
               className="btn-close"
@@ -76,7 +77,7 @@ const NewTodoModal = ({ setTodos, setShowAlert }) => {
           <div className="modal-body">
             <form>
               <div className="form-group row mb-2">
-                <label className="col-3">Titre</label>
+                <label className="col-3">Title</label>
                 <div className="col-4">
                   <input
                     onChange={handleTitle}
@@ -122,8 +123,8 @@ const NewTodoModal = ({ setTodos, setShowAlert }) => {
                   <option value="" defaultValue={""}>
                     Importance
                   </option>
-                  <option value="0">Normale</option>
-                  <option value="1">Urgente</option>
+                  <option value="0">Normal</option>
+                  <option value="1">Urgent</option>
                 </select>
               </div>
               <p className="text-center text-danger">{error}</p>
@@ -136,16 +137,21 @@ const NewTodoModal = ({ setTodos, setShowAlert }) => {
               data-bs-dismiss="modal"
               ref={input}
             >
-              Annuler
+              Cancel
             </button>
             <button type="button" onClick={addTodo} className="btn btn-primary">
-              Ajouter
+              Add
             </button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+NewTodoModal.propTypes = {
+  setTodos: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
 };
 
 const Textarea = styled.textarea`

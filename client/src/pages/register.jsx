@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import registerRequest from "../api/registerRequest";
-//Page pour créer un compte
+// Signup page
 const Register = () => {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
@@ -41,7 +41,7 @@ const Register = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
-            Mot de passe
+            Password
           </label>
           <input
             type="password"
@@ -53,11 +53,11 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <p className="text-danger">{passwordError}</p>
-          <p className="form-text">Au moins 8 charactères</p>
+          <p className="form-text">At least 8 characters</p>
         </div>
         <div className="mb-3">
           <label htmlFor="passwordconfirm" className="form-label">
-            Confirmé le mot de passe
+            Confirm password
           </label>
           <input
             type="password"
@@ -73,7 +73,7 @@ const Register = () => {
           id="submitregister"
           className="btn btn-primary mb-3"
         >
-          S'inscrire
+          Register
         </button>
       </form>
       <a
@@ -81,7 +81,7 @@ const Register = () => {
         href="#"
         onClick={() => navigate("/login")}
       >
-        Se connecter
+        Log In
       </a>
     </Container>
   );

@@ -1,9 +1,10 @@
 import { useRef } from "react";
-// Component représentant la fenêtre qui s'ouvre lorsque l'utilisateur clique sur le bouton de déconnexion
+import PropTypes from "prop-types";
+// Component representing the window that appears when the user clicks on the logout button
 const LogoutModal = ({ handleLogout }) => {
-  const input = useRef(null); // Lié au bouton annulé du modal
+  const input = useRef(null); // Related to the cancel button of the modal
   const logout = () => {
-    input.current.click(); // Permet de simuler la fermeture du modal avant de changer de page
+    input.current.click(); // Allows simulating the closing of the modal before changing the page
     handleLogout();
   };
   return (
@@ -11,7 +12,7 @@ const LogoutModal = ({ handleLogout }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Se déconnecter</h5>
+            <h5 className="modal-title">Log out</h5>
             <button
               type="button"
               className="btn-close"
@@ -20,7 +21,7 @@ const LogoutModal = ({ handleLogout }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+            <p>Are you sure you want to log out?</p>
           </div>
           <div className="modal-footer">
             <button
@@ -29,16 +30,20 @@ const LogoutModal = ({ handleLogout }) => {
               data-bs-dismiss="modal"
               ref={input}
             >
-              Annuler
+              Cancel
             </button>
             <button type="button" onClick={logout} className="btn btn-primary">
-              Se déconnecter
+              Log out
             </button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+LogoutModal.propTypes = {
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default LogoutModal;

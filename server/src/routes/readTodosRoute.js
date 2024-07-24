@@ -1,11 +1,11 @@
 const UserModel = require("../models/UserModel");
-// Renvoie tous les tâches d'un utilisateur spécifié
+// Send all tasks of a user
 module.exports = async (req, res) => {
   try {
     const userId = req.user.userId;
     const user = await UserModel.findById(userId);
     if (!user) {
-      return res.status(404).send({ error: "Utilisateur non trouvé" });
+      return res.status(404).send({ error: "User not found" });
     }
     res.status(200).json(user.todos);
   } catch (error) {

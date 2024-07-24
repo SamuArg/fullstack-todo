@@ -1,12 +1,13 @@
 import styled from "styled-components";
-//Component représentant une tâche qui s'affiche au milieu de l'écran pour voir toutes ses informations en grand
+import PropTypes from "prop-types";
+// Component representing a task displayed in the center of the screen to view all its information in a larger format
 const BigTodo = ({ todo, modalId }) => {
   const date = todo.date.split("T")[0];
   return (
     <div className="modal" id={todo._id} tabIndex="-1">
       <div className="modal-dialog modal-dialog-centered">
         <Container
-          // Variable de style dynamique seulement utilisé dans styled-components
+          // Dynamic style variable used only in styled-components
           $urgent={todo.urgent}
           $completed={todo.completed}
           className="modal-content"
@@ -23,8 +24,8 @@ const BigTodo = ({ todo, modalId }) => {
           <div className="modal-body">
             <h6>Date : {date}</h6>
             <p>Description : {todo.description}</p>
-            <p>Importance : {todo.urgent === "1" ? "Urgente" : "Normale"}</p>
-            <p>Complétée : {todo.completed ? "Oui" : "Non"}</p>
+            <p>Importance : {todo.urgent === "1" ? "Urgent" : "Normal"}</p>
+            <p>Completed : {todo.completed ? "Yes" : "Non"}</p>
           </div>
           <div className="modal-footer">
             <button
@@ -32,13 +33,25 @@ const BigTodo = ({ todo, modalId }) => {
               data-bs-target={modalId}
               className="btn btn-primary"
             >
-              Modifier
+              Edit
             </button>
           </div>
         </Container>
       </div>
     </div>
   );
+};
+
+BigTodo.propTypes = {
+  todo: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    urgent: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
+  modalId: PropTypes.string.isRequired,
 };
 
 const Container = styled.div`

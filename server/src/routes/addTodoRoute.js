@@ -1,5 +1,5 @@
 const UserModel = require("../models/UserModel");
-//Ajoute une tâche a un utilisateur
+//Add a task to a user
 module.exports = async (req, res) => {
   try {
     const { title, description, completed, date, urgent } = req.body;
@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const newTodo = { title, description, completed, date, urgent };
     const user = await UserModel.findById(userId);
     if (!user) {
-      return res.status(404).send({ error: "Utilisateur non trouvé" });
+      return res.status(404).send({ error: "User not found" });
     }
     user.todos.push(newTodo);
     await user.save();

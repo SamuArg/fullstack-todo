@@ -1,5 +1,5 @@
 const UserModel = require("../models/UserModel");
-// Permet de modifier une tâche existante
+// Edit an existing task
 module.exports = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -7,13 +7,13 @@ module.exports = async (req, res) => {
     const updates = req.body;
     const user = await UserModel.findById(userId);
     if (!user) {
-      return res.status(404).send({ error: "Utilisateur non trouvé" });
+      return res.status(404).send({ error: "User not found" });
     }
     const todo = user.todos.id(todoId);
     if (!todo) {
       return res.status(404).send({ error: "Todo non trouvé" });
     }
-    //Vérifie quel champ ont été modifié pour modifier seulement ceux-là dans la base de donnée
+    //Check which fields need to be updated
     if (updates.title !== undefined) {
       todo.title = updates.title;
     }

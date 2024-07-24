@@ -1,7 +1,7 @@
 const express = require("express");
 const isLoggedIn = require("./middleware/isLoggedIn");
 const router = express.Router();
-//Crée toutes les routes vers les bons endroits en vérifiant la connexion avant d'accéder aux infos personnelles
+//Creates all routes with auth
 router.post("/login", require("./routes/loginRoute"));
 router.get("/todos", isLoggedIn, require("./routes/readTodosRoute"));
 router.post("/register", require("./routes/registerRoute"));

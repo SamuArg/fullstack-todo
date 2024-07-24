@@ -1,6 +1,6 @@
 const UserModel = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
-//Permet la création d'un nouvel utilisateur
+//Register a new user
 module.exports = async (req, res) => {
   try {
     const { mail, password } = req.body;
@@ -14,11 +14,11 @@ module.exports = async (req, res) => {
       return res.status(400).send({ error: validationError.message });
     }
     await newUser.save();
-    res.status(201).send({ message: "L'utilisateur a été créé avec succès" });
+    res.status(201).send({ message: "The user has been created successfully" });
   } catch (error) {
-    // Si il y a duplication de mail
+    // Mail duplication
     if (error.code === 11000) {
-      return res.status(400).send({ error: "Le mail existe déjà" });
+      return res.status(400).send({ error: "The mail already exists" });
     }
     res.status(500).send({ error: error.message });
   }

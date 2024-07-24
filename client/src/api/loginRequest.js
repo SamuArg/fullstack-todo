@@ -1,5 +1,5 @@
 import { API_URL } from "./config";
-//Fait une requête pour se connecter
+// Makes a request to log in
 export default (mail, password) => {
   return fetch(`${API_URL}/login`, {
     method: "POST",

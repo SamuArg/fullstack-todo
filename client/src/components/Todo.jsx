@@ -7,13 +7,14 @@ import EditTodoModal from "./EditTodoModal";
 import BigTodo from "./BigTodo";
 import DeleteModal from "./DeleteModal";
 import { useState, useRef } from "react";
+import PropTypes from "prop-types";
 
-//Component représentant chaque tâche dans la page principal, permet de gérer chaque tâche individuellement en cliquant sur leurs boutons respectifs
+// Component representing each task on the main page, allows managing each task individually by clicking on their respective buttons
 const Todo = ({ todo, setTodos, setShowEditAlert }) => {
   const [deleteMessage, setDeleteMessage] = useState("");
   const deleteButtonRef = useRef(null);
   const askDeleteTodo = () => {
-    setDeleteMessage("Êtes-vous certain de vouloir supprimer la tâche ?");
+    setDeleteMessage("Are you sure you want to delete the task?");
     deleteButtonRef.current.click();
   };
 
@@ -39,7 +40,7 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
       .then((response) => {
         setTodos(response.todos);
         if (!todo.completed) {
-          setDeleteMessage("Voulez-vous supprimer cette tâche complétée ?");
+          setDeleteMessage("Do you want to delete this completed task?");
           deleteButtonRef.current.click();
         }
       })
@@ -91,7 +92,7 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
                 onChange={updateCompleted}
                 checked={todo.completed}
               />
-              <label className="form-check-label">Complétée</label>
+              <label className="form-check-label">Completed</label>
             </div>
           </Buttons>
         </div>
@@ -102,7 +103,7 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
         handleDelete={deleteTodo}
         message={deleteMessage}
       />
-      {/* Bouton caché pour simuler le click pour ouvrir le modal qui sert à valider la suppression d'un todo*/}
+      {/* Hidden button used to simulate a click to open the modal that serves to confirm the deletion of a todo*/}
       <button
         type="button"
         className="btn btn-primary d-none"
@@ -114,13 +115,26 @@ const Todo = ({ todo, setTodos, setShowEditAlert }) => {
   );
 };
 
+Todo.propTypes = {
+  todo: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    urgent: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
+  setTodos: PropTypes.func.isRequired,
+  setShowEditAlert: PropTypes.func.isRequired,
+};
+
 const Buttons = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 `;
 
-// Met ... si il n'y pas suffisamment de place pour toute la description
+// Adds ellipsis (...) if there isn't enough space to display the entire description
 const TextTruncate = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 1;

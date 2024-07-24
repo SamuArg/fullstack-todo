@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const router = require("./router");
 const cors = require("cors");
 
-// Récupère le .env
+// Get the .env
 dotenv.config();
 const corsOptions = {
   origin: process.env.FRONTEND_URI,
@@ -13,7 +13,7 @@ const corsOptions = {
 const app = express();
 
 app.use(express.json());
-//Entête cors
+//Cors headers
 app.use(cors(corsOptions));
 app.use(router);
 

@@ -1,9 +1,10 @@
 import { useRef } from "react";
-//Component représentant la fenêtre qui s'ouvre quand on veut supprimer une tâche
+import PropTypes from "prop-types";
+// Component representing the window that appears when the user wants to delete a task
 const DeleteModal = ({ handleDelete, message, modalId }) => {
-  const input = useRef(null); // Lié au bouton annulé du modal
+  const input = useRef(null); // Related to the cancel button of the modal
   const deleteTodo = () => {
-    input.current.click(); // Permet de simuler la fermeture du modal avant de changer de page
+    input.current.click(); // Allows simulating the closing of the modal before changing the page
     handleDelete();
   };
   return (
@@ -11,7 +12,7 @@ const DeleteModal = ({ handleDelete, message, modalId }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Supprimer une tâche</h5>
+            <h5 className="modal-title">Delete a task</h5>
             <button
               type="button"
               className="btn-close"
@@ -29,20 +30,26 @@ const DeleteModal = ({ handleDelete, message, modalId }) => {
               data-bs-dismiss="modal"
               ref={input}
             >
-              Non
+              No
             </button>
             <button
               type="button"
               onClick={deleteTodo}
               className="btn btn-primary"
             >
-              Oui
+              Yes
             </button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+DeleteModal.propTypes = {
+  handleDelete: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired,
+  modalId: PropTypes.string.isRequired,
 };
 
 export default DeleteModal;

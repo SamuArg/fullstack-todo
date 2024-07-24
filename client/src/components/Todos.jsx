@@ -3,8 +3,9 @@ import Todo from "./Todo";
 import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import PropTypes from "prop-types";
 
-//Component représentant toutes les tâches qui s'affichent sur la page principal, gère les filtres et le système de pagination
+// Component representing all the tasks displayed on the main page, manages filters and the pagination system
 const Todos = ({
   todos,
   setTodos,
@@ -19,21 +20,21 @@ const Todos = ({
   const pagesVisited = pageNumber * todosPerPage;
   const pages = [];
 
-  // À chaque changement de filtre remettre à la première page
+  // Reset to the first page with each filter change
   useEffect(() => {
     setPageNumber(0);
   }, [search, showCompleted]);
 
   const displayTodos = todos
     .filter((todo) =>
-      showCompleted === "Toutes"
+      showCompleted === "All"
         ? true
-        : showCompleted === "Complétées"
+        : showCompleted === "Completed"
         ? todo.completed
         : !todo.completed
     )
     .filter((todo) => {
-      if (searchField == "titre") {
+      if (searchField == "title") {
         return todo.title.toLowerCase().startsWith(search.toLowerCase());
       } else {
         return todo.description.toLowerCase().startsWith(search.toLowerCase());
@@ -55,9 +56,9 @@ const Todos = ({
   const pageCount = Math.ceil(
     todos
       .filter((todo) =>
-        showCompleted === "Toutes"
+        showCompleted === "All"
           ? true
-          : showCompleted === "Complétées"
+          : showCompleted === "Completed"
           ? todo.completed
           : !todo.completed
       )
@@ -78,7 +79,7 @@ const Todos = ({
     );
   };
 
-  //Vérifie si la page actuelle a encore des tâches, sinon revenir en arrière de 1
+  // Checks if the current page has any tasks left, if not, go back one page
   if (displayTodos.length === 0 && pageNumber > 0) {
     setPageNumber(pageNumber - 1);
   }
@@ -111,6 +112,24 @@ const Todos = ({
       )}
     </div>
   );
+};
+
+Todos.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      urgent: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+  setTodos: PropTypes.func.isRequired,
+  showCompleted: PropTypes.string.isRequired,
+  search: PropTypes.string.isRequired,
+  setShowEditAlert: PropTypes.func.isRequired,
+  searchField: PropTypes.string.isRequired,
 };
 
 const Paginate = styled.div`

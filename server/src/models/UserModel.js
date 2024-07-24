@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const TodoModel = require("./TodoModel");
 
 const mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-//Modèle d'un utilisateur
+//Model of a user
 const UserSchema = new mongoose.Schema({
   mail: {
     type: String,
     required: true,
     unique: true,
     match: mailRegex,
-    //Vérifie si le mail respecte le regex
+    //Check if mail respect the regex
   },
   password: {
     type: String,

@@ -1,5 +1,5 @@
 import { API_URL } from "./config";
-//Crée une requête pour supprimer une tâche
+// Creates a request to delete a task
 export default (todo, token) => {
   return fetch(`${API_URL}/todos/${todo._id}`, {
     method: "DELETE",

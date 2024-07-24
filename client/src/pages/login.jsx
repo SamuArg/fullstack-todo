@@ -2,7 +2,7 @@ import { useState } from "react";
 import loginRequest from "../api/loginRequest";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-// Page pour se connecter
+// Login page
 const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,12 +16,12 @@ const Login = () => {
         navigate("/");
       })
       .catch(() => {
-        setErrorMessage("Identification échouée");
+        setErrorMessage("Login failed");
       });
   };
   return (
     <Container className="p-3 border rounded mt-5">
-      <h1>Se Connecter</h1>
+      <h1>Log In</h1>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -37,7 +37,7 @@ const Login = () => {
         </div>
         <div className="mb-3">
           <label className="form-label" htmlFor="password">
-            Mot de passe
+            Password
           </label>
           <input
             type="password"
@@ -49,7 +49,7 @@ const Login = () => {
         </div>
         <p className="text-danger">{errorMessage}</p>
         <button type="submit" className="btn btn-primary mb-3">
-          Se connecter
+          Log In
         </button>
       </form>
       <a
@@ -57,7 +57,7 @@ const Login = () => {
         href="#"
         onClick={() => navigate("/register")}
       >
-        S'inscrire
+        Register
       </a>
     </Container>
   );
