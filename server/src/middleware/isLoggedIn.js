@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
-// Vérifie si l'utilisateur est bien connecté et renvoie le token de connexion
+// Check if the user is connected
 module.exports = (req, res, next) => {
   const header = req.headers.authorization;
   if (!header) {
-    res.status(401).send("Non connecté");
+    res.status(401).send("Not connected");
   } else {
     const token = header.split(" ")[1];
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
-        return res.status(403).send("Non connecté");
+        return res.status(403).send("Not connected");
       } else {
         req.user = decoded;
         next();
