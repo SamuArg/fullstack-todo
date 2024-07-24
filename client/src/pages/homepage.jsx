@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
-  const [showCompleted, setShowCompleted] = useState("Toutes");
+  const [showCompleted, setShowCompleted] = useState("All");
   const [search, setSearch] = useState("");
   const [showEditAlert, setShowEditAlert] = useState(false);
-  const [searchField, setSearchField] = useState("titre");
+  const [searchField, setSearchField] = useState("title");
 
   useEffect(() => {
     readTodosRequest(localStorage.getItem("token"))
