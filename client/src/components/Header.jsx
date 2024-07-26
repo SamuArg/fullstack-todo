@@ -155,7 +155,7 @@ const Header = ({
           onClick={handleShowCompleted}
           className="btn btn-primary"
         >
-          Montrer : {showCompleted}
+          Show : {showCompleted}
         </button>
         <button
           type="button"
@@ -167,7 +167,7 @@ const Header = ({
         <input
           className="form-control"
           type="search"
-          placeholder="Chercher"
+          placeholder="Search"
           aria-label="Search"
           onChange={handleSearch}
         ></input>
