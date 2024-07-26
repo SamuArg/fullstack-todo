@@ -74,11 +74,9 @@ To run this project locally, follow these steps:
 Here are some screenshots of the application:
 
 ![Login Page](assets/login.png)
-
 *Login Page*
 
 ![Register Page](assets/register.png)
-
 *Register page*
 
 ![Todo List](assets/todo_list.png)
