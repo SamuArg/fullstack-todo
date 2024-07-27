@@ -8,6 +8,7 @@
   - [Technologies Used](#technologies-used)
   - [Installation](#installation)
   - [Screenshots](#screenshots)
+  - [Live Demo](#live-demo)
 
 ## Introduction
 The MERN Todo App is a simple and intuitive task management application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It allows users to create, read, update, and delete tasks.
@@ -84,3 +85,6 @@ Here are some screenshots of the application:
 
 ![Add Todo](assets/add_todo.png)
 *Add Todo*
+
+## Live Demo
+Check out the live demo [here](https://samuarg-todo.netlify.app/).
